@@ -6,8 +6,13 @@ extern Hazel::Application* Hazel::CreateApplication();
 
 int main(int argc, char** argv)
 {
+	Hazel::Log::Init();
+	HZ_CORE_WARN("Initialize Log!");
+	std::string a = "yang";
+	HZ_INFO("Hello!, Var={0}", a);
+
 	auto app = Hazel::CreateApplication();
-	app->Run();
+	app->Run();   
 	delete app;
 }
 
