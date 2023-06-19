@@ -5,6 +5,8 @@
 #include "Hazel/Events/KeyEvent.h"
 #include "Hazel/Events/MouseEvent.h"
 
+#include "glad/glad.h"
+
 namespace Hazel {
 	static bool s_GLFWInitialized = false;
 
@@ -46,6 +48,9 @@ namespace Hazel {
 
 		m_Window = glfwCreateWindow((int)props.Width, static_cast<int>(props.Height), m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);   //glad获取GLFW的函数指针，不必手动处理函数加载
+		//gladLoadGLLoader 函数的作用是加载并初始化 glad 库，以及加载和存储 OpenGL 函数的地址，使你能够方便地调用 OpenGL 函数进行图形操作和渲染。
+		HZ_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 		
